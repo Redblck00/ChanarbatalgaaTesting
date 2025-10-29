@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.example.PlannerInterfaceTest" time="0.062" tests="12" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\Dudu\Documents\Чанарын Баталгаа ба туршилт\calendarapp\target\test-classes;C:\Users\Dudu\Documents\Чанарын Баталгаа ба туршилт\calendarapp\target\classes;C:\Users\Dudu\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.3\junit-jupiter-5.9.3.jar;C:\Users\Dudu\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\Dudu\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Dudu\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\Dudu\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Dudu\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.3\junit-jupiter-params-5.9.3.jar;C:\Users\Dudu\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\Dudu\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;"/>
+    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="user.timezone" value="Asia/Ulaanbaatar"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Users\Dudu\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.9.9-hotspot\bin"/>
+    <property name="sun.java.command" value="C:\Users\Dudu\AppData\Local\Temp\surefire7269227405595761973\surefirebooter13141340183619366494.jar C:\Users\Dudu\AppData\Local\Temp\surefire7269227405595761973 2025-10-29T23-52-58_883-jvmRun1 surefire12136555117589586546tmp surefire_06770618643476737473tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\Dudu\Documents\Чанарын Баталгаа ба туршилт\calendarapp\target\test-classes;C:\Users\Dudu\Documents\Чанарын Баталгаа ба туршилт\calendarapp\target\classes;C:\Users\Dudu\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.3\junit-jupiter-5.9.3.jar;C:\Users\Dudu\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\Dudu\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Dudu\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\Dudu\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Dudu\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.3\junit-jupiter-params-5.9.3.jar;C:\Users\Dudu\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\Dudu\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\Dudu"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2023-10-17"/>
+    <property name="java.home" value="C:\Users\Dudu\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.9.9-hotspot"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\Dudu\Documents\Чанарын Баталгаа ба туршилт\calendarapp"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\Dudu\AppData\Local\Temp\surefire7269227405595761973\surefirebooter13141340183619366494.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.9+9"/>
+    <property name="user.name" value="Dudu"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Temurin-17.0.9+9"/>
+    <property name="localRepository" value="C:\Users\Dudu\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\Dudu\AppData\Local\Temp\"/>
+    <property name="java.version" value="17.0.9"/>
+    <property name="user.dir" value="C:\Users\Dudu\Documents\Чанарын Баталгаа ба туршилт\calendarapp"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Users\Dudu\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.9.9-hotspot\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Users\Dudu\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\Dudu\AppData\Local\Programs\Python\Python312\;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\ProgramData\chocolatey\bin;C:\xampp\php;C:\Users\Dudu\Downloads\node-v20.11.1-win-x64\node-v20.11.1-win-x64;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\Java\jdk-22\bin;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\MinGW\bin;C:\Users\Dudu\AppData\Roaming\npm;c:\Users\Dudu\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Users\Dudu\apache-jmeter-5.6.3\bin;C:\Program Files\Apache\apache-maven-3.9.11\bin;C:\Users\Dudu\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\Dudu\AppData\Local\Programs\Python\Python311\;C:\Users\Dudu\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.9.9-hotspot\bin;C:\Users\Dudu\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Azure Data Studio\bin;C:\Users\Dudu\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Dudu\Downloads\php-8.3.4-Win32-vs16-x64;C:\Users\Dudu\Downloads\node-v20.11.1-win-x64\node-v20.11.1-win-x64;C:\xampp\php;C:\ghcup\bin;C:\Users\Dudu\AppData\Local\Coursier\data\bin;C:\Users\Dudu\AppData\Roaming\npm;C:\Users\Dudu\.dotnet\tools;C:\Users\Dudu\AppData\Local\Microsoft\WindowsApps;C:\Users\Dudu\Downloads\flutter_windows_3.24.5-stable\flutter\bin;C:\Users\Dudu\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\Dudu\apache-jmeter-5.6.3\bin;;c:\Users\Dudu\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Eclipse Adoptium"/>
+    <property name="java.vm.version" value="17.0.9+9"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="testPrintPersonSchedule_validPerson" classname="com.example.PlannerInterfaceTest" time="0.029"/>
+  <testcase name="testSetVacation_invalidData" classname="com.example.PlannerInterfaceTest" time="0.001"/>
+  <testcase name="testScheduleMeeting_success" classname="com.example.PlannerInterfaceTest" time="0.009"/>
+  <testcase name="testScheduleMeeting_duplicateMeeting" classname="com.example.PlannerInterfaceTest" time="0.002"/>
+  <testcase name="testScheduleMeeting_nullFields" classname="com.example.PlannerInterfaceTest" time="0.001"/>
+  <testcase name="testScheduleMeeting_invalidDate" classname="com.example.PlannerInterfaceTest" time="0"/>
+  <testcase name="testSetVacation_validData" classname="com.example.PlannerInterfaceTest" time="0"/>
+  <testcase name="testPrintPersonSchedule_emptyPerson" classname="com.example.PlannerInterfaceTest" time="0.001"/>
+  <testcase name="testRoomAvailable_whenEmpty_shouldReturnTrue" classname="com.example.PlannerInterfaceTest" time="0.001"/>
+  <testcase name="testPrintRoomSchedule_emptyRoom" classname="com.example.PlannerInterfaceTest" time="0"/>
+  <testcase name="testPersonAvailable_whenNoMeeting_shouldReturnTrue" classname="com.example.PlannerInterfaceTest" time="0"/>
+  <testcase name="testPrintRoomSchedule_validRoom" classname="com.example.PlannerInterfaceTest" time="0"/>
+</testsuite>
