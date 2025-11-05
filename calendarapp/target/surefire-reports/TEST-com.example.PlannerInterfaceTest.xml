@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.example.PlannerInterfaceTest" time="0.062" tests="12" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.example.PlannerInterfaceTest" time="0.06" tests="12" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Users\Dudu\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.9.9-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\Dudu\AppData\Local\Temp\surefire7269227405595761973\surefirebooter13141340183619366494.jar C:\Users\Dudu\AppData\Local\Temp\surefire7269227405595761973 2025-10-29T23-52-58_883-jvmRun1 surefire12136555117589586546tmp surefire_06770618643476737473tmp"/>
+    <property name="sun.java.command" value="C:\Users\Dudu\AppData\Local\Temp\surefire3705106201738029310\surefirebooter11027432122400164762.jar C:\Users\Dudu\AppData\Local\Temp\surefire3705106201738029310 2025-11-03T14-55-16_266-jvmRun1 surefire9708211910375350515tmp surefire_01863394552190502005tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Dudu\Documents\Чанарын Баталгаа ба туршилт\calendarapp\target\test-classes;C:\Users\Dudu\Documents\Чанарын Баталгаа ба туршилт\calendarapp\target\classes;C:\Users\Dudu\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.3\junit-jupiter-5.9.3.jar;C:\Users\Dudu\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\Dudu\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Dudu\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\Dudu\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Dudu\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.3\junit-jupiter-params-5.9.3.jar;C:\Users\Dudu\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\Dudu\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Dudu\AppData\Local\Temp\surefire7269227405595761973\surefirebooter13141340183619366494.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Dudu\AppData\Local\Temp\surefire3705106201738029310\surefirebooter11027432122400164762.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.9+9"/>
@@ -57,16 +57,16 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testPrintPersonSchedule_validPerson" classname="com.example.PlannerInterfaceTest" time="0.029"/>
+  <testcase name="testPrintPersonSchedule_validPerson" classname="com.example.PlannerInterfaceTest" time="0.031"/>
   <testcase name="testSetVacation_invalidData" classname="com.example.PlannerInterfaceTest" time="0.001"/>
   <testcase name="testScheduleMeeting_success" classname="com.example.PlannerInterfaceTest" time="0.009"/>
-  <testcase name="testScheduleMeeting_duplicateMeeting" classname="com.example.PlannerInterfaceTest" time="0.002"/>
+  <testcase name="testScheduleMeeting_duplicateMeeting" classname="com.example.PlannerInterfaceTest" time="0.001"/>
   <testcase name="testScheduleMeeting_nullFields" classname="com.example.PlannerInterfaceTest" time="0.001"/>
-  <testcase name="testScheduleMeeting_invalidDate" classname="com.example.PlannerInterfaceTest" time="0"/>
+  <testcase name="testScheduleMeeting_invalidDate" classname="com.example.PlannerInterfaceTest" time="0.001"/>
   <testcase name="testSetVacation_validData" classname="com.example.PlannerInterfaceTest" time="0"/>
-  <testcase name="testPrintPersonSchedule_emptyPerson" classname="com.example.PlannerInterfaceTest" time="0.001"/>
+  <testcase name="testPrintPersonSchedule_emptyPerson" classname="com.example.PlannerInterfaceTest" time="0"/>
   <testcase name="testRoomAvailable_whenEmpty_shouldReturnTrue" classname="com.example.PlannerInterfaceTest" time="0.001"/>
-  <testcase name="testPrintRoomSchedule_emptyRoom" classname="com.example.PlannerInterfaceTest" time="0"/>
+  <testcase name="testPrintRoomSchedule_emptyRoom" classname="com.example.PlannerInterfaceTest" time="0.001"/>
   <testcase name="testPersonAvailable_whenNoMeeting_shouldReturnTrue" classname="com.example.PlannerInterfaceTest" time="0"/>
   <testcase name="testPrintRoomSchedule_validRoom" classname="com.example.PlannerInterfaceTest" time="0"/>
 </testsuite>

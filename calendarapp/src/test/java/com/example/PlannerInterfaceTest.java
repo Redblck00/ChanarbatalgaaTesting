@@ -12,7 +12,7 @@ public class PlannerInterfaceTest {
         planner = new PlannerInterface();
     }
 
-    // ✅ ЗӨВ ажиллах тохиолдлууд
+    //  ЗӨВ ажиллах тохиолдлууд
     @Test
     void testScheduleMeeting_success() {
         boolean result = planner.scheduleMeeting("2025-10-30", "09:00", "Sara", "Room1");
