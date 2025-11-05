@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Meeting.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CalendarManager Coverage Report</a> &gt; <a href="index.source.html" class="el_package">calendar</a> &gt; <span class="el_source">Meeting.java</span></div><h1>Meeting.java</h1><pre class="source lang-java linenums">package calendar;
+
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * Уулзалтыг төлөөлөх класс
+ */
+public class Meeting {
+    private String title;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private String room;
+    private Set&lt;String&gt; participants;
+
+    public Meeting(String title, LocalDateTime startTime, LocalDateTime endTime, 
+<span class="fc" id="L18">                   String room, Set&lt;String&gt; participants) {</span>
+<span class="fc bfc" id="L19" title="All 4 branches covered.">        if (title == null || title.trim().isEmpty()) {</span>
+<span class="fc" id="L20">            throw new IllegalArgumentException(&quot;Уулзалтын нэр хоосон байж болохгүй&quot;);</span>
+        }
+<span class="pc bpc" id="L22" title="1 of 4 branches missed.">        if (startTime == null || endTime == null) {</span>
+<span class="fc" id="L23">            throw new IllegalArgumentException(&quot;Цаг оруулна уу&quot;);</span>
+        }
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (endTime.isBefore(startTime)) {</span>
+<span class="fc" id="L26">            throw new IllegalArgumentException(&quot;Дуусах цаг эхлэх цагаас өмнө байж болохгүй&quot;);</span>
+        }
+<span class="fc bfc" id="L28" title="All 4 branches covered.">        if (room == null || room.trim().isEmpty()) {</span>
+<span class="fc" id="L29">            throw new IllegalArgumentException(&quot;Өрөөний нэр оруулна уу&quot;);</span>
+        }
+<span class="fc bfc" id="L31" title="All 4 branches covered.">        if (participants == null || participants.isEmpty()) {</span>
+<span class="fc" id="L32">            throw new IllegalArgumentException(&quot;Оролцогч байх ёстой&quot;);</span>
+        }
+        
+<span class="fc" id="L35">        this.title = title;</span>
+<span class="fc" id="L36">        this.startTime = startTime;</span>
+<span class="fc" id="L37">        this.endTime = endTime;</span>
+<span class="fc" id="L38">        this.room = room;</span>
+<span class="fc" id="L39">        this.participants = new HashSet&lt;&gt;(participants);</span>
+<span class="fc" id="L40">    }</span>
+
+    // Getters
+    public String getTitle() {
+<span class="fc" id="L44">        return title;</span>
+    }
+
+    public LocalDateTime getStartTime() {
+<span class="fc" id="L48">        return startTime;</span>
+    }
+
+    public LocalDateTime getEndTime() {
+<span class="fc" id="L52">        return endTime;</span>
+    }
+
+    public String getRoom() {
+<span class="fc" id="L56">        return room;</span>
+    }
+
+    public Set&lt;String&gt; getParticipants() {
+<span class="fc" id="L60">        return new HashSet&lt;&gt;(participants);</span>
+    }
+
+    /**
+     * Өгөгдсөн хугацаа уулзалттай давхцаж байгаа эсэхийг шалгана
+     */
+    public boolean overlaps(LocalDateTime start, LocalDateTime end) {
+<span class="pc bpc" id="L67" title="1 of 4 branches missed.">        if (start == null || end == null) {</span>
+<span class="fc" id="L68">            throw new IllegalArgumentException(&quot;Цаг null байж болохгүй&quot;);</span>
+        }
+<span class="pc bpc" id="L70" title="1 of 4 branches missed.">        return !(end.isBefore(this.startTime) || end.isEqual(this.startTime) ||</span>
+<span class="pc bpc" id="L71" title="1 of 4 branches missed.">                 start.isAfter(this.endTime) || start.isEqual(this.endTime));</span>
+    }
+
+    /**
+     * Өгөгдсөн уулзалттай давхцаж байгаа эсэхийг шалгана
+     */
+    public boolean overlaps(Meeting other) {
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        if (other == null) {</span>
+<span class="fc" id="L79">            throw new IllegalArgumentException(&quot;Уулзалт null байж болохгүй&quot;);</span>
+        }
+<span class="fc" id="L81">        return this.overlaps(other.getStartTime(), other.getEndTime());</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L86">        return String.format(&quot;%s | %s - %s | Өрөө: %s | Оролцогчид: %s&quot;,</span>
+                title, startTime, endTime, room, participants);
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

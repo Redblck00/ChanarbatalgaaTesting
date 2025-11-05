@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalendarManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CalendarManager Coverage Report</a> &gt; <a href="index.source.html" class="el_package">calendar</a> &gt; <span class="el_source">CalendarManager.java</span></div><h1>CalendarManager.java</h1><pre class="source lang-java linenums">package calendar;
+
+import java.time.LocalDateTime;
+import java.util.*;
+
+/**
+ * Уулзалт болон амралтыг удирдах менежер класс
+ */
+public class CalendarManager {
+
+    private Set&lt;String&gt; rooms;
+    private Set&lt;String&gt; employees;
+    private List&lt;Meeting&gt; meetings;
+
+<span class="fc" id="L15">    public CalendarManager() {</span>
+<span class="fc" id="L16">        this.rooms = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L17">        this.employees = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L18">        this.meetings = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L19">    }</span>
+
+    // --------------------------
+    // ROOM ба EMPLOYEE нэмэх
+    // --------------------------
+
+    public boolean addRoom(String roomName) {
+<span class="pc bpc" id="L26" title="1 of 4 branches missed.">        if (roomName == null || roomName.trim().isEmpty()) {</span>
+<span class="fc" id="L27">            throw new IllegalArgumentException(&quot;Өрөөний нэр хоосон байж болохгүй&quot;);</span>
+        }
+<span class="fc" id="L29">        return rooms.add(roomName.trim());</span>
+    }
+
+    public boolean addEmployee(String name) {
+<span class="pc bpc" id="L33" title="1 of 4 branches missed.">        if (name == null || name.trim().isEmpty()) {</span>
+<span class="fc" id="L34">            throw new IllegalArgumentException(&quot;Ажилтны нэр хоосон байж болохгүй&quot;);</span>
+        }
+<span class="fc" id="L36">        return employees.add(name.trim());</span>
+    }
+
+    // --------------------------
+    // SCHEDULE MEETING
+    // --------------------------
+
+    public boolean scheduleMeeting(String title, LocalDateTime start, LocalDateTime end,
+                                   String room, Set&lt;String&gt; participants) {
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (!rooms.contains(room)) {</span>
+<span class="fc" id="L46">            throw new IllegalArgumentException(&quot;Өрөө бүртгэлгүй байна: &quot; + room);</span>
+        }
+
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        for (String p : participants) {</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">            if (!employees.contains(p)) {</span>
+<span class="fc" id="L51">                throw new IllegalArgumentException(&quot;Ажилтан бүртгэлгүй байна: &quot; + p);</span>
+            }
+<span class="fc" id="L53">        }</span>
+
+        // өрөө сул байгаа эсэх
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (!isRoomAvailable(room, start, end)) {</span>
+<span class="fc" id="L57">            return false;</span>
+        }
+
+        // оролцогчид сул байгаа эсэх
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        for (String p : participants) {</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">            if (!isPersonAvailable(p, start, end)) {</span>
+<span class="fc" id="L63">                return false;</span>
+            }
+<span class="fc" id="L65">        }</span>
+
+<span class="fc" id="L67">        Meeting m = new Meeting(title, start, end, room, participants);</span>
+<span class="fc" id="L68">        meetings.add(m);</span>
+<span class="fc" id="L69">        return true;</span>
+    }
+
+    // --------------------------
+    // CHECK ROOM / PERSON AVAILABILITY
+    // --------------------------
+
+    public boolean isRoomAvailable(String room, LocalDateTime start, LocalDateTime end) {
+<span class="pc bpc" id="L77" title="2 of 6 branches missed.">        if (room == null || start == null || end == null) {</span>
+<span class="fc" id="L78">            throw new IllegalArgumentException(&quot;Оруулсан утга буруу байна&quot;);</span>
+        }
+
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        for (Meeting m : meetings) {</span>
+<span class="fc bfc" id="L82" title="All 4 branches covered.">            if (m.getRoom().equals(room) &amp;&amp; m.overlaps(start, end)) {</span>
+<span class="fc" id="L83">                return false;</span>
+            }
+<span class="fc" id="L85">        }</span>
+<span class="fc" id="L86">        return true;</span>
+    }
+
+    public boolean isPersonAvailable(String person, LocalDateTime start, LocalDateTime end) {
+<span class="pc bpc" id="L90" title="3 of 6 branches missed.">        if (person == null || start == null || end == null) {</span>
+<span class="nc" id="L91">            throw new IllegalArgumentException(&quot;Оруулсан утга буруу байна&quot;);</span>
+        }
+
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        for (Meeting m : meetings) {</span>
+<span class="fc bfc" id="L95" title="All 4 branches covered.">            if (m.getParticipants().contains(person) &amp;&amp; m.overlaps(start, end)) {</span>
+<span class="fc" id="L96">                return false;</span>
+            }
+<span class="fc" id="L98">        }</span>
+<span class="fc" id="L99">        return true;</span>
+    }
+
+    // --------------------------
+    // GET SCHEDULES
+    // --------------------------
+
+    public List&lt;Meeting&gt; getAllMeetings() {
+<span class="fc" id="L107">        return new ArrayList&lt;&gt;(meetings);</span>
+    }
+
+    public List&lt;Meeting&gt; getRoomSchedule(String room) {
+<span class="fc" id="L111">        List&lt;Meeting&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        for (Meeting m : meetings) {</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">            if (m.getRoom().equals(room)) {</span>
+<span class="fc" id="L114">                result.add(m);</span>
+            }
+<span class="fc" id="L116">        }</span>
+<span class="fc" id="L117">        result.sort(Comparator.comparing(Meeting::getStartTime));</span>
+<span class="fc" id="L118">        return result;</span>
+    }
+
+    public List&lt;Meeting&gt; getPersonSchedule(String person) {
+<span class="fc" id="L122">        List&lt;Meeting&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">        for (Meeting m : meetings) {</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">            if (m.getParticipants().contains(person)) {</span>
+<span class="fc" id="L125">                result.add(m);</span>
+            }
+<span class="fc" id="L127">        }</span>
+<span class="fc" id="L128">        result.sort(Comparator.comparing(Meeting::getStartTime));</span>
+<span class="fc" id="L129">        return result;</span>
+    }
+
+    // --------------------------
+    // BREAK / REST TIME
+    // --------------------------
+
+    public boolean scheduleBreak(String person, LocalDateTime start, LocalDateTime end) {
+<span class="fc bfc" id="L137" title="All 2 branches covered.">        if (!employees.contains(person)) {</span>
+<span class="fc" id="L138">            throw new IllegalArgumentException(&quot;Ажилтан бүртгэлгүй байна: &quot; + person);</span>
+        }
+
+        // давхцаж байгаа уулзалт байгаа эсэхийг шалгах
+<span class="fc bfc" id="L142" title="All 2 branches covered.">        if (!isPersonAvailable(person, start, end)) {</span>
+<span class="fc" id="L143">            return false;</span>
+        }
+
+<span class="fc" id="L146">        Set&lt;String&gt; participants = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L147">        participants.add(person);</span>
+
+<span class="fc" id="L149">        Meeting breakMeeting = new Meeting(&quot;Амралт&quot;, start, end, &quot;BREAK&quot;, participants);</span>
+<span class="fc" id="L150">        meetings.add(breakMeeting);</span>
+<span class="fc" id="L151">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

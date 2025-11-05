@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="CalendarManager" default="test" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
+    
+    <!-- Properties -->
+    <property name="src.dir" value="src/main/java"/>
+    <property name="test.dir" value="src/test/java"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="test.classes.dir" value="${build.dir}/test-classes"/>
+    <property name="test.reports.dir" value="${build.dir}/test-reports"/>
+    <property name="coverage.dir" value="${build.dir}/coverage"/>
+    <property name="javadoc.dir" value="${build.dir}/javadoc"/>
+    <property name="lib.dir" value="lib"/>
+    
+    <!-- JUnit 5 Dependencies -->
+    <property name="junit.platform.version" value="1.9.3"/>
+    <property name="junit.jupiter.version" value="5.9.3"/>
+    
+    <!-- JaCoCo Properties -->
+    <property name="jacoco.version" value="0.8.11"/>
+    
+    <!-- Classpath for compilation -->
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+    
+    <!-- Classpath for tests -->
+    <path id="test.classpath">
+        <path refid="classpath"/>
+        <pathelement location="${classes.dir}"/>
+        <pathelement location="${test.classes.dir}"/>
+    </path>
+    
+    <!-- JaCoCo Ant Task Definition -->
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath path="${lib.dir}/jacocoant.jar"/>
+    </taskdef>
+    
+    <!-- Target: clean -->
+    <target name="clean" description="Хуучин build файлуудыг устгах">
+        <delete dir="${build.dir}"/>
+        <echo message="Эхлэлийг цэвэрлэв"/>
+    </target>
+    
+    <!-- Target: init -->
+    <target name="init" description="Build directory uusgeh">
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${test.classes.dir}"/>
+        <mkdir dir="${test.reports.dir}"/>
+        <mkdir dir="${coverage.dir}"/>
+        <mkdir dir="${javadoc.dir}"/>
+        <mkdir dir="${lib.dir}"/>
+        <echo message="Folderuud beltgegdlee"/>
+    </target>
+    
+    <!-- Target: download-dependencies -->
+    <target name="download-dependencies" depends="init" description="JUnit 5 болон JaCoCo сангуудыг татаж авах">
+        <!-- JUnit Platform -->
+        <get src="https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/${junit.platform.version}/junit-platform-console-standalone-${junit.platform.version}.jar"
+             dest="${lib.dir}/junit-platform-console-standalone-${junit.platform.version}.jar"
+             skipexisting="true"/>
+        
+        <!-- JaCoCo Agent -->
+        <get src="https://repo1.maven.org/maven2/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar"
+             dest="${lib.dir}/jacocoagent.jar"
+             skipexisting="true"/>
+        
+        <!-- JaCoCo Ant -->
+        <get src="https://repo1.maven.org/maven2/org/jacoco/org.jacoco.ant/${jacoco.version}/org.jacoco.ant-${jacoco.version}-nodeps.jar"
+             dest="${lib.dir}/jacocoant.jar"
+             skipexisting="true"/>
+        
+        <echo message="JUnit 5 болон JaCoCo dependencies tatagdlaa"/>
+    </target>
+    
+    <!-- Target: compile -->
+    <target name="compile" depends="download-dependencies" description="Үндсэн кодыг compile хийх">
+        <javac srcdir="${src.dir}" 
+               destdir="${classes.dir}" 
+               includeantruntime="false"
+               encoding="UTF-8"
+               source="11"
+               target="11"
+               debug="true">
+            <classpath refid="classpath"/>
+        </javac>
+        <echo message="undsen code compile success"/>
+    </target>
+    
+    <!-- Target: compile-tests -->
+    <target name="compile-tests" depends="compile" description="Тестийн кодыг compile хийх">
+        <javac srcdir="${test.dir}" 
+               destdir="${test.classes.dir}" 
+               includeantruntime="false"
+               encoding="UTF-8"
+               source="11"
+               target="11"
+               debug="true">
+            <classpath refid="test.classpath"/>
+        </javac>
+        <echo message="Test Code amjilttai"/>
+    </target>
+    
+    <!-- Target: test -->
+    <target name="test" depends="compile-tests" description="JUnit testuudiig ajiluulah">
+        <junitlauncher haltOnFailure="false" printSummary="true">
+            <classpath refid="test.classpath"/>
+            <testclasses outputdir="${test.reports.dir}">
+                <fileset dir="${test.classes.dir}">
+                    <include name="**/*Test.class"/>
+                </fileset>
+                <listener type="legacy-xml" sendSysOut="true" sendSysErr="true"/>
+                <listener type="legacy-plain" sendSysOut="true"/>
+            </testclasses>
+        </junitlauncher>
+        <echo message="testuud duuslaa"/>
+    </target>
+    
+    <!-- Target: coverage - JaCoCo Coverage Report -->
+    <target name="coverage" depends="compile-tests" description="Code coverage tootsooloh">
+        <echo message="JaCoCo Coverage эхэлж байна..."/>
+        
+        <!-- Coverage ажиллуулах -->
+        <jacoco:coverage destfile="${coverage.dir}/jacoco.exec">
+            <java classname="org.junit.platform.console.ConsoleLauncher" 
+                  fork="true" 
+                  failonerror="false"
+                  resultproperty="test.result">
+                <classpath refid="test.classpath"/>
+                <arg value="--scan-classpath"/>
+                <arg value="${test.classes.dir}"/>
+                <arg value="--reports-dir=${test.reports.dir}"/>
+            </java>
+        </jacoco:coverage>
+        
+        <echo message=" testuud duuslaa"/>
+        
+        <!-- HTML Report үүсгэх -->
+        <jacoco:report>
+            <executiondata>
+                <file file="${coverage.dir}/jacoco.exec"/>
+            </executiondata>
+            
+            <structure name="CalendarManager Coverage Report">
+                <classfiles>
+                    <fileset dir="${classes.dir}"/>
+                </classfiles>
+                <sourcefiles encoding="UTF-8">
+                    <fileset dir="${src.dir}"/>
+                </sourcefiles>
+            </structure>
+            
+            <html destdir="${coverage.dir}/html"/>
+            <csv destfile="${coverage.dir}/report.csv"/>
+            <xml destfile="${coverage.dir}/report.xml"/>
+        </jacoco:report>
+        
+        <echo message=""/>
+        <echo message="===== Coverage Report belen bollop ====="/>
+        <echo message="HTML Report: ${coverage.dir}/html/index.html"/>
+        <echo message="CSV Report: ${coverage.dir}/report.csv"/>
+        <echo message="XML Report: ${coverage.dir}/report.xml"/>
+        <echo message="========================================"/>
+    </target>
+    
+    <!-- Target: javadoc -->
+    <target name="javadoc" depends="compile" description="Javadoc uusgeh">
+        <javadoc sourcepath="${src.dir}" 
+                 destdir="${javadoc.dir}"
+                 encoding="UTF-8"
+                 charset="UTF-8"
+                 docencoding="UTF-8">
+            <classpath refid="classpath"/>
+        </javadoc>
+        <echo message="Javadoc amjilttai uusle"/>
+    </target>
+    
+    <!-- Target: all -->
+    <target name="all" depends="clean,coverage,javadoc" description="Бүх зүйлийг бүрэн ажиллуулах">
+        <echo message="All build Success!"/>
+    </target>
+    
+</project>
