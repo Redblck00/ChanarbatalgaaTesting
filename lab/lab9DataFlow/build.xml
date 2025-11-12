@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="BubbleSort" default="all" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
+
+    <!-- Directory properties -->
+    <property name="src.dir" value="src/main"/>
+    <property name="test.dir" value="src/test"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="test.classes.dir" value="${build.dir}/test-classes"/>
+    <property name="test.reports.dir" value="${build.dir}/test-reports"/>
+    <property name="coverage.dir" value="${build.dir}/coverage"/>
+    <property name="lib.dir" value="lib"/>
+
+    <!-- Versions -->
+    <property name="junit.version" value="1.10.2"/>
+    <property name="jacoco.version" value="0.8.11"/>
+
+    <!-- Classpath definitions -->
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+
+    <path id="test.classpath">
+        <path refid="classpath"/>
+        <pathelement location="${classes.dir}"/>
+        <pathelement location="${test.classes.dir}"/>
+    </path>
+
+    <!-- JaCoCo Ant task -->
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath path="${lib.dir}/jacocoant.jar"/>
+    </taskdef>
+
+    <!-- Clean -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <echo message="Build directory цэвэрлэгдлээ"/>
+    </target>
+
+    <!-- Init folders -->
+    <target name="init">
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${test.classes.dir}"/>
+        <mkdir dir="${test.reports.dir}"/>
+        <mkdir dir="${coverage.dir}"/>
+        <mkdir dir="${lib.dir}"/>
+    </target>
+
+    <!-- Download dependencies -->
+    <target name="download-dependencies" depends="init">
+        <echo message="Dependencies татаж байна..."/>
+        <get src="https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/${junit.version}/junit-platform-console-standalone-${junit.version}.jar"
+             dest="${lib.dir}/junit-platform-console-standalone-${junit.version}.jar"
+             skipexisting="true"
+             verbose="true"/>
+        <get src="https://repo1.maven.org/maven2/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar"
+             dest="${lib.dir}/jacocoagent.jar"
+             skipexisting="true"
+             verbose="true"/>
+        <get src="https://repo1.maven.org/maven2/org/jacoco/org.jacoco.ant/${jacoco.version}/org.jacoco.ant-${jacoco.version}-nodeps.jar"
+             dest="${lib.dir}/jacocoant.jar"
+             skipexisting="true"
+             verbose="true"/>
+        <echo message="Dependencies татагдлаа"/>
+    </target>
+
+    <!-- Compile main code -->
+    <target name="compile" depends="download-dependencies">
+        <echo message="Main code compile хийж байна..."/>
+        <javac srcdir="${src.dir}" 
+               destdir="${classes.dir}" 
+               includeantruntime="false" 
+               encoding="UTF-8" 
+               debug="true"
+               source="1.8"
+               target="1.8">
+            <classpath refid="classpath"/>
+        </javac>
+        <echo message="Main code compile амжилттай"/>
+    </target>
+
+    <!-- Compile test code -->
+    <target name="compile-tests" depends="compile">
+        <echo message="Test code compile хийж байна..."/>
+        <javac srcdir="${test.dir}" 
+               destdir="${test.classes.dir}" 
+               includeantruntime="false" 
+               encoding="UTF-8" 
+               debug="true"
+               source="1.8"
+               target="1.8">
+            <classpath refid="test.classpath"/>
+        </javac>
+        <echo message="Test code compile амжилттай"/>
+    </target>
+
+    <!-- Run JUnit 5 tests -->
+    <target name="test" depends="compile-tests">
+        <echo message="JUnit 5 тестүүд ажиллаж байна..."/>
+        <java jar="${lib.dir}/junit-platform-console-standalone-${junit.version}.jar" 
+              fork="true"
+              failonerror="false">
+            <classpath refid="test.classpath"/>
+            <arg value="--scan-classpath"/>
+            <arg value="--class-path"/>
+            <arg value="${test.classes.dir}"/>
+        </java>
+        <echo message="Тестүүд дууслаа"/>
+    </target>
+
+    <!-- JaCoCo coverage -->
+    <target name="coverage" depends="compile-tests">
+        <echo message="JaCoCo coverage эхэлж байна..."/>
+        <jacoco:coverage destfile="${coverage.dir}/jacoco.exec">
+            <java classname="org.junit.platform.console.ConsoleLauncher" 
+                  fork="true" 
+                  failonerror="false">
+                <classpath refid="test.classpath"/>
+                <arg value="--scan-classpath"/>
+                <arg value="--class-path"/>
+                <arg value="${test.classes.dir}"/>
+            </java>
+        </jacoco:coverage>
+
+        <jacoco:report>
+            <executiondata>
+                <file file="${coverage.dir}/jacoco.exec"/>
+            </executiondata>
+            <structure name="BubbleSort Coverage Report">
+                <classfiles>
+                    <fileset dir="${classes.dir}"/>
+                </classfiles>
+                <sourcefiles encoding="UTF-8">
+                    <fileset dir="${src.dir}"/>
+                </sourcefiles>
+            </structure>
+            <html destdir="${coverage.dir}/html"/>
+            <csv destfile="${coverage.dir}/report.csv"/>
+            <xml destfile="${coverage.dir}/report.xml"/>
+        </jacoco:report>
+        <echo message="Coverage report бэлэн: ${coverage.dir}/html/index.html"/>
+    </target>
+
+    <!-- All: clean, compile, test, coverage -->
+    <target name="all" depends="clean,coverage,test">
+        <echo message="Бүх build алхамууд амжилттай"/>
+    </target>
+
+</project>
